@@ -25,9 +25,7 @@ soup = BeautifulSoup(html)
 
 # Target the number of the last page to step through with a regular expression, store as an integer
 regexin = re.search(r'Page \d\r\n\s+of \d+', str(soup))
-
 targetpage = re.sub(r"\s+","", regexin.group().replace("\r\n",""))
-
 pagelimit = int(targetpage[targetpage.find("f")+1:])
 
 print 'Pages to scrape: ' + str(pagelimit) + '\n====================\n'
@@ -44,13 +42,13 @@ while (paging <= pagelimit):
        score = col[1].string
        species = col[2].string
        weapon = col[3].string
-       type = col[4].string
+       killtype = col[4].string
        county = col[5].string
        first = col[6].string
        last = col[7].string
        city = col[8].string
        details = 'http://outdoornebraska.ne.gov' + col[9].find('a').get('href')
-       animals = (year.strip(), score.strip(), species.strip(), weapon.strip(), type.strip(), county.strip(), first.strip(), last.strip(), city.strip(), details.strip(),"\n")
+       animals = (year.strip(), score.strip(), species.strip(), weapon.strip(), killtype.strip(), county.strip(), first.strip(), last.strip(), city.strip(), details.strip(),"\n")
        f.write("\t".join(animals))
    sleep(5)
    nextpage = mech.follow_link(text_regex="Next >")
