@@ -57,7 +57,5 @@ while (paging <= pagelimit):
    nexthtml = nextpage.read()
    soup = BeautifulSoup(nexthtml)
    paging = paging + 1
-   if paging = pagelimit:
-       pass
    
 f.close()
