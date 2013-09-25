@@ -24,8 +24,10 @@ html = page.read()
 soup = BeautifulSoup(html)
 
 # Target the number of the last page to step through with a regular expression, store as an integer
-regexin = re.search(r'Page (\d)\n\s+of (\d+)', str(soup))
-targetpage = re.sub(r"\s+","", regexin.group().replace("\n",""))
+regexin = re.search(r'Page \d\r\n\s+of \d+', str(soup))
+
+targetpage = re.sub(r"\s+","", regexin.group().replace("\r\n",""))
+
 pagelimit = int(targetpage[targetpage.find("f")+1:])
 
 print 'Pages to scrape: ' + str(pagelimit) + '\n====================\n'
@@ -55,5 +57,7 @@ while (paging <= pagelimit):
    nexthtml = nextpage.read()
    soup = BeautifulSoup(nexthtml)
    paging = paging + 1
-
+   if paging = pagelimit:
+       pass
+   
 f.close()
